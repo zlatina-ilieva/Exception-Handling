@@ -1,0 +1,45 @@
+/*
+Write a method ReadNumber(int start, int end) that enters an integer number in given range [start…end]. If an invalid number or 
+non-number text is entered, the method should throw an exception. Using this method write a program that enters 10 numbers:
+			a1, a2, … a10, such that 1 < a1 < … < a10 < 100
+*/
+
+using System;
+
+class ReadNum
+{
+    private static int ReadNumber(int start, int end)
+    {
+        int n;
+        Console.Write("Enter number: ");
+        try
+        {
+            n = int.Parse(Console.ReadLine());
+        }
+        catch (System.FormatException) 
+        {
+            throw new FormatException("Invalid number");
+        }
+        catch (System.OverflowException) 
+        {
+            throw new OverflowException("Not in the scope of integer.");
+        }
+        catch (System.ArgumentNullException) 
+        {
+            throw new ArgumentNullException("Null is not an integer number.");
+        }
+        if (n < start || n > end)
+        {
+            throw new ArgumentException("Not in valid range!");
+        }
+        return n;
+    }
+    static void Main()
+    {
+        int n = 1;
+        for (int i = 1; i <= 10; i++)
+        {
+            n = ReadNumber(n, 100);
+        }   
+    }
+}
